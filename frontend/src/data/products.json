@@ -1,0 +1,108 @@
+[
+    {
+      "id": 1,
+      "name": "Kewum",
+      "category": "sweets",
+      "description": "Kewum is a traditional Sri Lankan sweet made from jaggery, coconut, and rice flour, known for its chewy texture and rich, sweet flavor.",
+      "price": 10.00,
+      "oldPrice": 12.00,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732885854/Kewum_kfxwdg.jpg",
+      "color": "brown",
+      "rating": 4.5,
+      "author":"admin"
+    },
+    {
+      "id": 2,
+      "name": "Kokkis",
+      "category": "sweets",
+      "description": "Kokis is a traditional Sri Lankan sweet made from rice flour, sugar, coconut milk, and cardamom, deep-fried to a crispy, golden texture.",
+      "price": 2.99,
+      "oldPrice": 1.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732885967/miris-kokis5_ykms7s.jpg",
+      "color": "yellow",
+      "rating": 3.5
+    },
+    {
+      "id": 3,
+      "name": "Faluda",
+      "category": "drinks",
+      "description": "Faluda is a popular dessert drink made with rose syrup, vermicelli, basil seeds, milk, and ice cream, often served as a refreshing treat in South Asia.",
+      "price": 10.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886057/category2_qe8sac.jpg",
+      "color": "pink",
+      "rating": 4
+    },
+    {
+      "id": 4,
+      "name": "Kola Kenda",
+      "category": "drinks",
+      "description": "Kola Kenda is a traditional Sri Lankan herbal porridge made with a mix of leafy greens, rice, and coconut milk, known for its nutritious and healing properties.",
+      "price": 19.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886120/kola-kenda-for-breakfast_b1zosb.jpg",
+      "color": "red",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "name": "Kanji",
+      "category": "drinks",
+      "description": "Kanji is a traditional Sri Lankan rice porridge, often made with rice, spices, and sometimes vegetables or meat, known for its soothing and comforting qualities, especially during illness or as a breakfast dish.",
+      "price": 5.99,
+      "oldPrice": 7.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886237/images_8_xe9bos.jpg",
+      "color": "white",
+      "rating": 4.3
+    },
+    {
+      "id": 6,
+      "name": "Patties",
+      "category": "savouries",
+      "description": "Patties are a popular snack in Sri Lanka, consisting of a flaky pastry shell filled with spiced meat (such as chicken, beef, or fish) or vegetables, and then deep-fried to a golden, crispy texture.",
+      "price": 10.00,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886327/images_9_smxc6v.jpg",
+      "color": "brown",
+      "rating": 4
+    },
+    {
+      "id": 7,
+      "name": "Rolls",
+      "category": "savouries",
+      "description": "Rolls are a popular Sri Lankan snack made by wrapping spiced meat, vegetables, or fish in a soft, thin flatbread, then deep-frying or baking them to create a crispy, savory treat.",
+      "price": 14.99,
+      "oldPrice": 20.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886402/mutton_rolls_wehvof.jpg",
+      "color": "brown",
+      "rating": 5
+    },
+    {
+      "id": 8,
+      "name": "Ulundu Vadai",
+      "category": "savouries",
+      "description": "Ulundu Vadai is a savory Sri Lankan snack made from ground urad dal (black lentils), seasoned with spices and herbs, then deep-fried into crispy, doughnut-shaped fritters.",
+      "price": 39.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732888250/images_12_djrjcq.jpg",
+      "color": "Yellow",
+      "rating": 3
+    },
+    {
+      "id": 9,
+      "name": "Kotthu",
+      "category": "food",
+      "description": "Kotthu is a popular Sri Lankan street food made by stir-frying chopped roti (flatbread) with vegetables, meat (chicken, beef, or mutton), eggs, and a blend of spices, creating a flavorful and hearty dish.",
+      "price": 49.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886573/images_10_jfrfvl.jpg",
+      "color": "black",
+      "rating": 5
+    },
+    {
+      "id": 10,
+      "name": "Fried Rice",
+      "category": "food",
+      "description": "Fried rice is a popular dish made by stir-frying cooked rice with vegetables, meat (chicken, beef, or seafood), eggs, and a variety of seasonings, often including soy sauce, to create a flavorful, quick meal.",
+      "price": 59.99,
+      "oldPrice": 79.99,
+      "image": "https://res.cloudinary.com/dcgt00fxi/image/upload/v1732886637/images_11_lo0zwn.jpg",
+      "color": "green",
+      "rating": 5
+    }
+  ]
