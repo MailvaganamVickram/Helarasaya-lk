@@ -21,7 +21,7 @@ const CategoryPage = () => {
    })
   return (
     <>
-      <section className='bg-primary-light section__container'>
+      <section className='Section__container bg-primary-light'>
         <h2 className='section__header uppercase'>{categoryName}</h2>
         <p className='section__subheader'>Browse a diverse range of categories, from local sweets to drinks.</p>
 

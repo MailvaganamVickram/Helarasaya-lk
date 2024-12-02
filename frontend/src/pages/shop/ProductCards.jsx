@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import RatingStars from '../../components/RatingStars'; // Make sure to import the RatingStars component
+import { addToCart } from '../../redux/features/cart/cartSlice';
 
 const ProductCards = ({ products }) => {
-    
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (products) => {
+        dispatch(addToCart(products))
+    }
 
     return (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
+        <div className='section__container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
             {products.map((product, index) => (
                 <div key={index} className="product__card">
                     <div className="relative">
@@ -21,12 +27,15 @@ const ProductCards = ({ products }) => {
 
                         {/* Add to Cart Button */}
                         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark">
+                            <button onClick={(e) =>{
+                                e.stopPropagation();
+                                handleAddToCart(product)
+                            }} className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark">
                                 <i className="ri-shopping-cart-2-line"></i>
                             </button>
                         </div>
                     </div>
-                    {/* Product description */}
+                    {/* Product description */} 
                     <div className="product__card__content">
                         <h4>{product.name}</h4>
                         <p>${product.price} {product.oldPrice ? <s>${product?.oldPrice}</s> : null}</p>
