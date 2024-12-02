@@ -6,12 +6,12 @@ const ProductCards = ({ products }) => {
     
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
             {products.map((product, index) => (
                 <div key={index} className="product__card">
                     <div className="relative">
                         {/* Image and Link */}
-                        <Link to={`/shop/${product._id}`}>
+                        <Link to={`/shop/${product.id}`}>
                             <img
                                 src={product.image}
                                 alt={product.name || 'Product'}
