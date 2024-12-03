@@ -15,84 +15,83 @@ const CartModal = ({ products, isOpen, onClose }) => {
   }
   return (
     <div
-      className={`fixed z-[1000] inset-0 bg-black bg-opacity-50 transition-opacity 
+    className={`cart-overlay fixed z-[1000] inset-0 bg-black bg-opacity-50 transition-opacity 
       ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-      style={{ transition: 'opacity 300ms' }}
-    >
-      <div
-        className={`fixed right-0 top-0 md:w-1/3 w-full bg-white h-full overflow-y-auto transition-transform 
+  >
+    <div
+      className={`cart-modal fixed right-0 top-0 md:w-1/3 w-full bg-white h-full overflow-y-auto transition-transform 
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        style={{ transition: 'transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
-      >
-        {/* Modal Content */}
-        <div className="p-4 mt-4">
-          <div className="flex justify-between items-center mb-4">
-            <h4 className="text-red-800 font-semibold">Your Cart</h4>
-            <button 
-              onClick={onClose}
-              className="text-gray-300 hover:text-gray-900"
-            >
-              <i className="ri-close-line bg-black p-1 text-white"></i>
-            </button>
-          </div>
-
-          {/* Product List */}
-          <div>
-            {products.length === 0 ? (
-              <div className="text-center text-gray-500">Cart is empty</div>
-            ) : (
-              products.map((item, index) => (
-                <div key={index} className="flex justify-between items-center my-2">
-                  <div className="flex items-center">
-                    <span className="mr-4 px-1 bg-primary text-white rounded-full">
-                      {index + 1}
-                    </span>
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="rounded mr-4" 
-                      style={{ width: '32px', height: '32px', objectFit: 'cover' }} // Enforced inline styles
-                    />
-                    <div>
-                      <h5>{item.name}</h5>
-                      <p>LKR {Number(item.price).toFixed(2)}</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button 
-                      onClick={() =>handleQuantity('decrement', item.id)}
-                        aria-label="Decrease quantity" 
-                        className="px-2 py-1 border rounded-md text-lg"
-                      >
-                        -
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button 
-                       onClick={() =>handleQuantity('increment', item.id)}
-                        aria-label="Increase quantity" 
-                        className="px-2 py-1 border rounded-md text-lg"
-                      >
-                        +
-                      </button>
-                      <div>
-                        <button 
-                        onClick={(e)=> handleRemove(e, item.id)}
-                        className='text-red-500 hover:text-red-900'>
-                          Remove
-                          </button>
-                      </div>
-                    </div>
+    >
+      {/* Modal Content */}
+      <div className="modal-content p-6">
+        {/* Header */}
+        <div className="modal-header flex justify-between items-center mb-4">
+          <h4 className="text-xl font-semibold text-gray-800">Your Cart</h4>
+          <button 
+            onClick={onClose}
+            className="close-button text-gray-500 hover:text-red-500 transition duration-200"
+            aria-label="Close Cart"
+          >
+            <i className="ri-close-line text-2xl"></i>
+          </button>
+        </div>
+  
+        {/* Product List */}
+        <div className="modal-body space-y-4">
+          {products.length === 0 ? (
+            <div className="text-center text-gray-500">Your cart is empty.</div>
+          ) : (
+            products.map((item, index) => (
+              <div key={index} className="product-item flex justify-between items-center p-2 border-b">
+                <div className="product-info flex items-center gap-4">
+                  <span className="product-index px-2 py-1 bg-primary text-white rounded-full">
+                    {index + 1}
+                  </span>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="product-image w-12 h-12 rounded object-cover"
+                  />
+                  <div>
+                    <h5 className="product-name text-lg font-medium">{item.name}</h5>
+                    <p className="product-price text-sm text-gray-600">LKR {Number(item.price).toFixed(2)}</p>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
+                <div className="product-actions flex items-center gap-2">
+                  <button
+                    onClick={() => handleQuantity('decrement', item.id)}
+                    className="quantity-decrement px-2 py-1 border rounded-md text-lg"
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <span className="product-quantity">{item.quantity}</span>
+                  <button
+                    onClick={() => handleQuantity('increment', item.id)}
+                    className="quantity-increment px-2 py-1 border rounded-md text-lg"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={(e) => handleRemove(e, item.id)}
+                    className="remove-button text-red-500 hover:text-red-700"
+                    aria-label="Remove item"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
         </div>
-            {/* Calculation  */}
-            {
-              products.length > 0 && (<OrderSummary/>)
-            }
+  
+        {/* Order Summary */}
+        {products.length > 0 && <OrderSummary />}
       </div>
     </div>
+  </div>
+  
   );
 };
 

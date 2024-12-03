@@ -1,8 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import CartModal from '../pages/shop/CartModal';
+
+import avatarImg from "../assets/avatar.png"
+import { useLogoutUserMutation } from '../redux/features/auth/authApi';
+import { logout } from '../redux/features/auth/authSlice';
+
+
+
 
 const Navbar = () => {
   const products = useSelector((state) => state.cart.products || []); // Ensure products array exists
@@ -11,6 +17,46 @@ const Navbar = () => {
   const handleCartToggle = () => {
     setIsCartOpen((prev) => !prev);
   };
+   // show user if logged in
+   const dispatch =  useDispatch();
+   const {user} = useSelector((state) => state.auth);
+   const [logoutUser] = useLogoutUserMutation();
+   const navigate = useNavigate()
+  
+ // dropdown menus
+ const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+ const handDropDownToggle = () => {
+     setIsDropDownOpen(!isDropDownOpen)
+ }
+
+ // admin dropdown menu
+ const adminDropDownMenus = [
+  {label: "Dashboard", path: "/dashboard/admin"},
+  {label: "Manage Items", path: "/dashboard/manage-products"},
+  {label: "All Orders", path: "/dashboard/manage-orders"},
+  {label: "Add Product", path: "/dashboard/add-product"},
+]
+
+   // user dropdown menus
+   const userDropDownMenus = [
+    {label: "Dashboard", path: "/dashboard"},
+    {label: "Profile", path: "/dashboard/profile"},
+    {label: "Payments", path: "/dashboard/payments"},
+    {label: "Orders", path: "/dashboard/orders"},
+]
+
+const dropdownMenus = user?.role === 'admin' ? [...adminDropDownMenus] : [...userDropDownMenus]
+
+//handle logout
+const handleLogout = async () => {
+  try {
+      await logoutUser().unwrap();
+      dispatch(logout())
+      navigate('/')
+  } catch (error) {
+      console.error("Failed to log out", error)
+  }
+}
 
   return (
     <header className="fixed-nav-bar w-nav">
@@ -57,9 +103,9 @@ const Navbar = () => {
 
           {/* Shopping Bag Icon */}
           <span>
-            <button onClick={handleCartToggle} className="hover:text-primary">
+            <button onClick={handleCartToggle} className="cart-button">
               <i className="ri-shopping-bag-line text-xl"></i>
-              <sup className="text-sm inline-block px-1.5 text-white rounded-full bg-primary text-center">
+              <sup className="cart-badge">
                 {products.length}
               </sup>
             </button>
@@ -67,9 +113,47 @@ const Navbar = () => {
 
           {/* User Icon */}
           <span>
-            <Link to="/login">
-              <i className="ri-user-line text-xl"></i>
-            </Link>
+            {
+              user && user ? (<>
+              
+              <img 
+              onClick={handDropDownToggle}
+              src={user?.profileImage || avatarImg} alt='' className="user-avatar"/>
+              {
+                isDropDownOpen && (
+                  <div className="dropdown-container absolute right-0 mt-3 p-4 w-48 bg-white border border-gray-300 shadow-lg rounded-md">
+                       <ul ul className="dropdown-list font-medium space-y-4 p-2">
+                          {dropdownMenus.map((menu, index) => (
+                          <li key={index}>
+                           <Link
+                          onClick={() => setIsDropDownOpen(false)}
+                          className="dropdown-item block px-3 py-2 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700 transition-all duration-200 ease-in-out"
+                          to={menu.path}
+                          >
+                          {menu.label}
+                         </Link>
+                         </li>
+                         ))}
+                         <li>
+                          <Link 
+                          onClick={handleLogout}
+                          className='dropdown-item block px-3 py-2 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700 transition-all duration-200 ease-in-out'>
+                          Logout
+                          </Link>
+                         </li>
+                       </ul>
+                  </div>
+
+                )
+              }
+              
+              </>) :(<Link to="login">
+                <i className="ri-user-line"></i>
+            </Link>)
+            }
+
+
+            
           </span>
         </div>
       </nav>
