@@ -791,3 +791,12 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #f3f4f6; /* Tailwind equivalent: hover:bg-gray-100 */
   color: #1f2937; /* Tailwind equivalent: hover:text-gray-800 */
 }
+/* Pagination Button Style */
+.pagination-button {
+  @apply px-4 py-2 bg-red-500 text-gray-800 rounded-md mr-2 hover:bg-gray-100 disabled:bg-gray-200 disabled:text-gray-300 cursor-pointer focus:outline-none;
+}
+
+/* Active Button Style */
+.pagination-button-active {
+  @apply active:bg-blue-500 active:text-white;
+}

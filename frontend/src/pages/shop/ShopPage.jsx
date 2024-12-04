@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import productData from '../../data/products.json';
+import products from '../../data/products.json';
 import ProductCards from './ProductCards';
 import ShopFiltering from './ShopFiltering';
+import { useFetchAllProductsQuery } from '../../redux/features/products/productsApi';
 
 const filters = {
   categories: ['all', 'sweets', 'drinks', 'savouries', 'food'],
@@ -15,57 +16,58 @@ const filters = {
 };
 
 const ShopPage = () => {
-  const [products, setProducts] = useState(productData);
+  
   const [filtersState, setFiltersState] = useState({
     category: 'all',
     color: 'all',
-    priceRange: null,
+    priceRange: '',
+    
   });
+  
+  
 
-  // Filter function
-  const applyFilters = () => {
-    let filteredProducts = productData;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ProductsPerPage] = useState(8);
 
-    // Filter by category
-    if (filtersState.category !== 'all') {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.category === filtersState.category
-      );
-    }
+  const { category, color, priceRange } = filtersState;
+  const [minPrice, maxPrice] = priceRange  &&  priceRange.includes('-') ? priceRange.split('-').map(Number)    : [0, Infinity];
+  console.log(priceRange);
+  //const [minPrice, maxPrice] = priceRange.split('-').map(Number);
 
-    // Filter by color
-    if (filtersState.color !== 'all') {
-      filteredProducts = filteredProducts.filter(
-        (product) => product.color === filtersState.color
-      );
-    }
+  const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({
+      category: category !== 'all' ? category : '',
+      color: color !== 'all' ? color : '',
+      minPrice: isNaN(minPrice) ? '' : minPrice,
+      maxPrice: isNaN(maxPrice) ? '' : maxPrice,
+      page: currentPage,
+      limit: ProductsPerPage,
+  })
 
-    // Filter by price range
-    if (filtersState.priceRange) {
-      const { min, max } = filtersState.priceRange;
-      filteredProducts = filteredProducts.filter(
-        (product) => product.price >= min && product.price <= max
-      );
-    }
 
-    setProducts(filteredProducts);
-  };
-
-  // Run filters on filterState change
-  useEffect(() => {
-    applyFilters();
-  }, [filtersState]);
-
-  // Clear filters
+//Clear Filters
   const clearFilters = () => {
     setFiltersState({
       category: 'all',
       color: 'all',
-      priceRange: null,
+      priceRange: ''
     });
-    setProducts(productData); // Reset products to initial data when filters are cleared
+    //setProducts(productData); // Reset products to initial data when filters are cleared
   };
 
+     // handle paginations here
+     const handlePageChange = (pageNumber) => {
+      if(pageNumber > 0 && pageNumber <= totalPages) {
+          setCurrentPage(pageNumber)
+      }
+  }
+
+  if (isLoading) return <div>Loading....</div>
+  if (error) return <div>Error loading products.</div>
+
+  const startProduct = (currentPage - 1) * ProductsPerPage + 1;
+  const endProduct = startProduct + products.length - 1;
+
+  
   return (
     <>
       <section className="section__container bg-primary-light">
@@ -85,8 +87,30 @@ const ShopPage = () => {
 
           {/* Right side - Products */}
           <div>
-            <h3 className="text-xl font-medium mb-4">Products Available</h3>
+            <h3 className="text-xl font-medium mb-4">Showing {startProduct} to {endProduct} of {totalProducts}</h3>
+            {/* <ProductCards products={products} /> */}
             <ProductCards products={products} />
+            {/* pagination controls */}
+            <div className='mt-6 flex justify-center'>
+              <button
+              disabled ={currentPage === 1} 
+              onClick={()=>handlePageChange(currentPage - 1)}
+              className="pagination-button">Previous</button>
+              {
+                                [...Array(totalPages)].map((_, index) => (
+                                    <button key={index}
+                                    onClick={() => handlePageChange(index + 1)}
+                                        className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'}
+                                        rounded-md mx-1
+                                        `}
+                                    >{index + 1}</button>
+                                ))
+                            }
+              <button 
+              disabled={currentPage === totalPages}
+               onClick={() => handlePageChange(currentPage + 1)}
+              className="pagination-button" >Next</button>
+            </div>
           </div>
         </div>
       </section>

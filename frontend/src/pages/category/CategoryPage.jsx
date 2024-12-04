@@ -6,7 +6,6 @@ import ProductCards from '../shop/ProductCards';
 const CategoryPage = () => {
 
     const {categoryName} =useParams();
-    console.log(categoryName); //access the category name from the URL
 
    const [filteredProducts, setfilteredProducts] = useState([]);
 
