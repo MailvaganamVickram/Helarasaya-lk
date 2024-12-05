@@ -59,114 +59,111 @@ const handleLogout = async () => {
 }
 
   return (
-    <header className="fixed-nav-bar w-nav">
-      <nav className="max-w-screen-2xl mx-auto px-4 justify-between items-center flex">
-        {/* Navigation Links */}
-        <ul className="nav__links flex gap-6">
-          <li className="link">
-            <Link to="/" className="hover:text-primary">
-              Home
-            </Link>
-          </li>
-          <li className="link">
-            <Link to="/shop" className="hover:text-primary">
-              Shop
-            </Link>
-          </li>
-          <li className="link">
-            <Link to="/aboutus" className="hover:text-primary">
-              About Us
-            </Link>
-          </li>
-          <li className="link">
-            <Link to="/contact" className="hover:text-primary">
-              Contact
-            </Link>
-          </li>
-        </ul>
+<header className="fixed-nav-bar w-nav">
+  <nav className="max-w-screen-2xl mx-auto px-4 justify-between items-center flex">
+    {/* Navigation Links */}
+    <ul className="nav__links flex gap-6">
+      <li className="link">
+        <Link to="/" className="hover:text-primary">
+          Home
+        </Link>
+      </li>
+      <li className="link">
+        <Link to="/shop" className="hover:text-primary">
+          Shop
+        </Link>
+      </li>
+      <li className="link">
+        <Link to="/aboutus" className="hover:text-primary">
+          About Us
+        </Link>
+      </li>
+      <li className="link">
+        <Link to="/contact" className="hover:text-primary">
+          Contact
+        </Link>
+      </li>
+    </ul>
 
-        {/* Logo */}
-        <div className="nav__logo">
-          <Link to="/" className="text-white text-2xl">
-            Helarasaya<span className="text-primary">.LK</span>
-          </Link>
-        </div>
+    {/* Logo */}
+    <div className="nav__logo">
+      <Link to="/" className="text-white text-2xl">
+        Helarasaya<span className="text-primary">.LK</span>
+      </Link>
+    </div>
 
-        {/* Navigation Icons */}
-        <div className="nav__icons relative flex gap-4">
-          {/* Search Icon */}
-          <span>
-            <Link to="/search">
-              <i className="ri-search-line text-xl"></i>
-            </Link>
-          </span>
+    {/* Navigation Icons */}
+    <div className="nav__icons relative flex gap-4">
+      {/* Search Icon */}
+      <span>
+        <Link to="/search">
+          <i className="ri-search-line text-xl"></i>
+        </Link>
+      </span>
 
-          {/* Shopping Bag Icon */}
-          <span>
-            <button onClick={handleCartToggle} className="cart-button">
-              <i className="ri-shopping-bag-line text-xl"></i>
-              <sup className="cart-badge">
-                {products.length}
-              </sup>
-            </button>
-          </span>
+      {/* Shopping Bag Icon */}
+      <span>
+        <button onClick={handleCartToggle} className="cart-button">
+          <i className="ri-shopping-bag-line text-xl"></i>
+          <sup className="cart-badge">{products.length}</sup>
+        </button>
+      </span>
 
-          {/* User Icon */}
-          <span>
-            {
-              user && user ? (<>
-              
-              <img 
+      {/* User Icon */}
+      <span>
+        {user ? (
+          <>
+            <img
               onClick={handDropDownToggle}
-              src={user?.profileImage || avatarImg} alt='' className="user-avatar"/>
-              {
-                isDropDownOpen && (
-                  <div className="dropdown-container absolute right-0 mt-3 p-4 w-48 bg-white border border-gray-300 shadow-lg rounded-md">
-                       <ul ul className="dropdown-list font-medium space-y-4 p-2">
-                          {dropdownMenus.map((menu, index) => (
-                          <li key={index}>
-                           <Link
-                          onClick={() => setIsDropDownOpen(false)}
-                          className="dropdown-item block px-3 py-2 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700 transition-all duration-200 ease-in-out"
-                          to={menu.path}
-                          >
-                          {menu.label}
-                         </Link>
-                         </li>
-                         ))}
-                         <li>
-                          <Link 
-                          onClick={handleLogout}
-                          className='dropdown-item block px-3 py-2 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700 transition-all duration-200 ease-in-out'>
-                          Logout
-                          </Link>
-                         </li>
-                       </ul>
-                  </div>
+              src={user?.profileImage || avatarImg}
+              alt="User Avatar"
+              className="user-avatar"
+            />
+            {isDropDownOpen && (
+              <div className="dropdown-container absolute right-0 mt-3 p-4 w-48 bg-white border border-gray-300 shadow-lg rounded-md">
+                <ul className="dropdown-list font-medium space-y-4 p-2">
+                  {dropdownMenus.map((menu, index) => (
+                    <li key={index}>
+                      <Link
+                        onClick={() => setIsDropDownOpen(false)}
+                        className="dropdown-item block px-3 py-2 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700 transition-all duration-200 ease-in-out"
+                        to={menu.path}
+                      >
+                        {menu.label}
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
+                    <Link
+                      onClick={handleLogout}
+                      className="dropdown-item block px-3 py-2 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700 transition-all duration-200 ease-in-out"
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </>
+        ) : (
+          <Link to="login">
+            <i className="ri-user-line"></i>
+          </Link>
+        )}
+      </span>
+    </div>
+  </nav>
 
-                )
-              }
-              
-              </>) :(<Link to="login">
-                <i className="ri-user-line"></i>
-            </Link>)
-            }
+  {/* Cart Modal */}
+  {isCartOpen && (
+    <CartModal
+      products={products}
+      isOpen={isCartOpen}
+      onClose={handleCartToggle}
+    />
+  )}
+</header>
 
-
-            
-          </span>
-        </div>
-      </nav>
-
-      {/* Cart Modal */}
-      {isCartOpen && (
-        <CartModal
-          products={products}
-          isOpen={isCartOpen}
-          onClose={handleCartToggle}
-        />
-      )}
-    </header>
   );
 };
 
