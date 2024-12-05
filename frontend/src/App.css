@@ -800,3 +800,164 @@ input[type="number"]::-webkit-outer-spin-button {
 .pagination-button-active {
   @apply active:bg-blue-500 active:text-white;
 }
+
+/* Tailwind Styles for Timeline Container */
+.timeline-container {
+  @apply sm:flex items-center relative;
+  /* You can add more global styles here, such as spacing or alignment */
+}
+
+/* Tailwind Styles for Timeline Step */
+.timeline-step {
+  @apply relative flex items-center gap-4;
+  /* This applies the flex and gap layout for each step */
+}
+
+.timeline-step::after {
+  @apply content-[""] w-full h-[2px] bg-gray-300 absolute top-1/2 left-full;
+  /* Adding line between steps */
+}
+
+.timeline-step-last::after {
+  @apply hidden;
+  /* Hides the line after the last step */
+}
+
+/* Tailwind Styles for Icons */
+.timeline-icon {
+  @apply flex items-center justify-center w-10 h-10 rounded-full;
+  /* Default circle for icons */
+}
+
+.timeline-icon-completed {
+  @apply bg-green-500 text-white;
+  /* Completed steps (green background) */
+}
+
+.timeline-icon-current {
+  @apply bg-blue-500 text-white;
+  /* Current step (blue background) */
+}
+
+.timeline-icon-pending {
+  @apply bg-gray-300 text-gray-500;
+  /* Pending steps (gray background) */
+}
+
+/* Tailwind Styles for Description */
+.timeline-description {
+  @apply text-sm;
+}
+
+.timeline-text-completed {
+  @apply text-green-500;
+  /* Completed text color */
+}
+
+.timeline-text-current {
+  @apply text-blue-500 font-semibold;
+  /* Current text color */
+}
+
+.timeline-text-pending {
+  @apply text-gray-400;
+  /* Pending text color */
+}
+
+.timeline-step {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 2.5rem;
+}
+
+.timeline-step .step-icon {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  ring: 0;
+  ring-color: white;
+  flex-shrink: 0;
+}
+
+.timeline-step .step-connector {
+  display: none;
+  width: 100%;
+  height: 0.125rem;
+}
+
+.timeline-step .step-content {
+  margin-top: 0.75rem;
+  padding-right: 2rem;
+}
+
+.timeline-step .step-label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.timeline-step .step-time {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #9CA3AF; /* Gray-400 */
+}
+
+.timeline-step .step-description {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.timeline-step {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 2.5rem;
+}
+
+.timeline-step .step-icon {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  ring: 0;
+  ring-color: white;
+  flex-shrink: 0;
+}
+
+.timeline-step .step-connector {
+  display: none;
+  width: 100%;
+  height: 0.125rem;
+}
+
+.timeline-step .step-content {
+  margin-top: 0.75rem;
+  padding-right: 2rem;
+}
+
+.timeline-step .step-label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.timeline-step .step-time {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #9CA3AF; /* Gray-400 */
+}
+
+.timeline-step .step-description {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+
