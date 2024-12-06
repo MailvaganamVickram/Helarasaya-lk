@@ -17,6 +17,13 @@ import OrderDetails from '../pages/dashboard/user/OrderDetails';
 import UserPayments from '../pages/dashboard/user/dashboard/UserPayments';
 import UserReviews from '../pages/dashboard/user/UserReviews';
 import UserProfile from '../pages/dashboard/user/UserProfile';
+import AdminDMain from '../pages/dashboard/admin/AdminDMain';
+import AddProducts from '../pages/dashboard/admin/addProducts/AddProducts';
+import ManageProduct from '../pages/dashboard/admin/manageProduct/ManageProduct';
+import UpdateProduct from '../pages/dashboard/admin/manageProduct/UpdateProduct';
+import ManageUsers from '../pages/dashboard/admin/users/ManageUsers';
+import ManageOrders from '../pages/dashboard/admin/manageOrders/ManageOrders';
+
 
 
 const router = createBrowserRouter([
@@ -66,12 +73,12 @@ const router = createBrowserRouter([
             { path: 'reviews', element: <UserReviews /> },
 
             // admin routes {// only accessible for admins}
-            {path:'admin', element:<PrivateRoute role="admin" ><div>Admin main</div></PrivateRoute>},
-            {path:'add-product', element:<PrivateRoute role="admin" ><div>Admin add product</div></PrivateRoute>},
-            {path:'manage-products', element:<PrivateRoute role="admin" ><div>Admin manage product</div></PrivateRoute>},
-            {path:'update-product/:id', element:<PrivateRoute role="admin" ><div>Admin update product</div></PrivateRoute>},
-            {path:'users', element:<PrivateRoute role="admin" ><div>Admin user page</div></PrivateRoute>},
-            {path:'manage-orders', element:<PrivateRoute role="admin" ><div>Admin manage order</div></PrivateRoute>},
+            {path:'admin', element:<PrivateRoute role="admin" ><AdminDMain/></PrivateRoute>},
+            {path:'add-product', element:<PrivateRoute role="admin" ><AddProducts/></PrivateRoute>},
+            {path:'manage-products', element:<PrivateRoute role="admin" ><ManageProduct/></PrivateRoute>},
+            {path:'update-product/:id', element:<PrivateRoute role="admin" ><UpdateProduct/></PrivateRoute>},
+            {path:'users', element:<PrivateRoute role="admin" ><ManageUsers/></PrivateRoute>},
+            {path:'manage-orders', element:<PrivateRoute role="admin" ><ManageOrders/></PrivateRoute>},
 
     ]
   }

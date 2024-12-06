@@ -20,6 +20,9 @@ app.use(cors({
   credentials :true,
 }))
 
+//Image Upload 
+const uploadImag = require('./src/utils/uploadImage')
+
 //all routes
 
 const authRoutes = require('./src/users/user.route')
@@ -36,6 +39,9 @@ app.use('/api/stats',statsRoutes)
 
 
 
+
+
+
 main().then(()=> console.log("Mongo Db is successfully connected  ")).catch(err => console.log(err));
 
 async function main() {
@@ -48,6 +54,9 @@ async function main() {
 
 }
 
+app.post("/uploadImage",(req, res) =>{
+  uploadImag(req.body.image).then((url)=> res.send(url)).catch((err)=> res.status(500).send(err))
+})
 
 
 app.listen(port, () => {
